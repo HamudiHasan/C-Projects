@@ -1,0 +1,643 @@
+/*
+*/
+# include "iGraphics.h"
+int x[100];
+int y[100], draw=0,play=0,help=0,ret_help=0,ply_agn=0,ply_h_bck=0;
+int turn, occupied[9]={0}, array[9]={-1},win=0,help_ply=0,flag=0;
+/* 
+	function iDraw() is called again and again by the system.
+	occupied
+*/
+void drawTextBox()
+{
+	if(play==0&&help!=1)
+	{
+		iShowBMP(0, 0, "Front Page.bmp");
+	}
+	if(play==1)
+	{
+		iShowBMP(0, 0, "background.bmp");
+		iSetColor(255, 255, 255);
+		iRectangle(250, 270, 101, 101);
+		iRectangle(250, 370, 101, 101);
+		iRectangle(250, 470, 101, 101);
+		iRectangle(350, 270, 101, 101);
+		iRectangle(350, 370, 101, 101);
+		iRectangle(350, 470, 101, 101);
+		iRectangle(450, 270, 101, 101);
+		iRectangle(450, 370, 101, 101);
+		iRectangle(450, 470, 101, 101);
+	
+	
+
+	}
+	if(help_ply==1)
+	{
+		iShowBMP(0, 0,"help.bmp");
+
+	}
+	if(help_ply==1&&ply_agn>0)
+	{
+		iShowBMP(0, 0,"help.bmp");
+
+	}
+	
+	 if(help==1)
+	{
+		iShowBMP(0, 0,"help.bmp");
+
+	}
+	 if(ply_agn>0&&help_ply!=1)
+	 {
+		 iClear();
+		iShowBMP(0, 0, "background.bmp");
+		iSetColor(255, 255, 255);
+		iRectangle(250, 270, 100, 100);
+		iRectangle(250, 370, 100, 100);
+		iRectangle(250, 470, 100, 100);
+		iRectangle(350, 270, 100, 100);
+		iRectangle(350, 370, 100, 100);
+		iRectangle(350, 470, 100, 100);
+		iRectangle(450, 270, 100, 100);
+		iRectangle(450, 370, 100, 100);
+		iRectangle(450, 470, 100, 100);
+
+	 }
+	  if(ply_agn>0&&draw>0&&help_ply!=1)
+	 {
+		 iClear();
+		iShowBMP(0, 0, "background.bmp");
+		iSetColor(255, 255, 255);
+		iRectangle(250, 270, 101, 101);
+		iRectangle(250, 370, 101, 101);
+		iRectangle(250, 470, 101, 101);
+		iRectangle(350, 270, 101, 101);
+		iRectangle(350, 370, 101, 101);
+		iRectangle(350, 470, 101, 101);
+		iRectangle(450, 270, 101, 101);
+		iRectangle(450, 370, 101, 101);
+		iRectangle(450, 470, 101, 101);
+
+	 }
+}
+
+
+void drawRectangle1(int p, int q)
+{
+	iShowBMP(p-2, q-2, "cross.bmp");
+
+}
+
+void drawRectangle2(int p, int q)
+{
+	iShowBMP(p-2, q-2, "round.bmp");
+
+}
+
+void iDraw()
+{
+	iClear();
+	if(ret_help==1)
+	{
+		iShowBMP(0, 0, "Front Page.bmp");
+	}
+	if(ply_h_bck=1)
+	{
+		iShowBMP(0, 0, "background.bmp");
+		ply_h_bck--;
+
+	}
+
+	drawTextBox();
+	int i;
+	for(i = 0; i < turn; i++)
+	{
+		if(i%2==0&&help_ply!=1&&draw!=1)
+			drawRectangle1(x[i], y[i]);
+		else if(i%2!=0&&help_ply!=1&&draw!=1)
+			drawRectangle2(x[i],y[i]);
+	}
+		if(array[0]==1 &&array[4]==1 &&array[8]==1)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 1.bmp");
+		
+
+		}	
+		else if(array[0]==1 &&array[3]==1 &&array[6]==1)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 1.bmp");
+		
+
+		}
+		else if(array[2]==1&&array[4]==1&&array[6]==1)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 1.bmp");
+		
+
+		}
+		else if(array[1]==1&&array[4]==1&&array[7]==1)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 1.bmp");
+	
+
+		}
+		else if(array[2]==1&&array[5]==1&&array[8]==1)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 1.bmp");
+		
+
+		
+		}
+		else if(array[0]==1&&array[1]==1&&array[2]==1)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 1.bmp");
+		;
+
+		}
+		else if(array[3]==1&&array[4]==1&&array[5]==1)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 1.bmp");
+			
+
+		}
+		else if(array[6]==1&&array[7]==1&&array[8]==1)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 1.bmp");
+		
+
+		}
+		else if(array[0]==2 &&array[4]==2 &&array[8]==2)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 2.bmp");
+			
+
+		}
+		else if(array[0]==2 &&array[3]==2 &&array[6]==2)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 2.bmp");
+		;
+
+		}
+		else if(array[2]==2&&array[4]==2&&array[6]==2)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 2.bmp");
+		
+
+		}
+		else if(array[1]==2&&array[4]==2&&array[7]==2)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 2.bmp");
+			
+
+		}
+		else if(array[2]==2&&array[5]==2&&array[8]==2)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 2.bmp");
+		
+		}
+		else if(array[0]==2&&array[1]==2&&array[2]==2)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 2.bmp");
+		
+
+		}
+		else if(array[3]==2&&array[4]==2&&array[5]==2)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 2.bmp");
+		
+
+		}
+		else if(array[6]==2&&array[7]==2&&array[8]==2)
+		{
+			win=1;
+			iShowBMP(0, 0, "player 2.bmp");
+		}
+	else if(turn >=9&&help_ply==0)
+	{
+		draw++;
+		iShowBMP(0, 0, "draw.bmp");
+	
+	}
+}	
+	//place your drawing codes here	
+
+
+
+
+/* 
+	function iMouseMove() is called when the user presses and drags the mouse.
+	(mx, my) is the position where the mouse pointer is.
+*/
+void iMouseMove(int mx, int my)
+{
+	//place your codes here
+}
+
+/* 
+	function iMouse() is called when the user presses/releases the mouse.
+	(mx, my) is the position where the mouse pointer is.
+*/
+void iMouse(int button, int state, int mx, int my)
+{
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+
+		//place your codes here	
+		if(play==0&&help==1&&mx>=0&&mx<=130&&my>=0&&my<116)
+		{
+			help=0;
+			play=0;
+
+		}
+		
+		if(play==1&&help_ply==0&&ply_agn==1&&mx>=105&&mx<=350&&my>=50&&my<100)
+		{
+			help_ply=1;
+
+		}
+		//if(play==1&&help_ply==1&&mx>507&& mx<750&&my>50&&my<100)
+		//{
+		//	ply_h_bck=1;
+		//	help_ply--;
+		
+		//}
+		//if(play==1&&help_ply==1&&ply_agn==1&&mx>507&& mx<750&&my>50&&my<100)
+		//{
+		//	ply_h_bck=1;
+		//	help_ply--;
+		
+		//}
+
+
+
+		if(play==1&&win==1&&mx>0&&mx<112&&my>=10&&my<=130)
+		{
+			win--;
+			occupied[0]=0;
+			occupied[1]=0;
+			occupied[2]=0;
+			occupied[3]=0;
+			occupied[4]=0;
+			occupied[5]=0;
+			occupied[6]=0;
+			occupied[7]=0;
+			occupied[8]=0;
+			array[0]=-1;
+			array[1]=-1;
+			array[2]=-1;
+			array[3]=-1;
+			array[4]=-1;
+			array[5]=-1;
+			array[6]=-1;
+			array[7]=-1;
+			array[8]=-1;
+			ply_agn++;
+			turn=0;
+			draw=0;
+			help=0;
+			help_ply=0;
+
+		}
+		if(play==1&&draw>0&&mx>102 && mx<421 && my>=22 && my<=73)
+		{
+			win=0;
+			occupied[0]=0;
+			occupied[1]=0;
+			occupied[2]=0;
+			occupied[3]=0;
+			occupied[4]=0;
+			occupied[5]=0;
+			occupied[6]=0;
+			occupied[7]=0;
+			occupied[8]=0;
+			array[0]=-1;
+			array[1]=-1;
+			array[2]=-1;
+			array[3]=-1;
+			array[4]=-1;
+			array[5]=-1;
+			array[6]=-1;
+			array[7]=-1;
+			array[8]=-1;
+			ply_agn++;
+			turn=0;
+			help=0;
+			help_ply=0;
+	
+
+		}
+
+
+		if(play==1&&win==1&&mx>467&&mx<710&&my>36&&my<88)
+		{
+			exit(0);
+		}
+		if(play==1&&draw==1&&mx>473 && mx<717 && my>22 && my<73)
+		{
+			exit(0);
+		}
+
+
+		if(play==1&&win==0&&ply_h_bck!=1&&mx>=0&&mx<=130&&my>0&&my<550)
+		{
+			exit(0);
+		}
+		 if(play==0&&mx>600&&mx<756&&my>368&&my<428)
+		{
+			exit(0);
+		}
+
+		if(play==0&&help==1&&mx>507&& mx<750&&my>50&&my<100)
+		{
+			ret_help=1;
+			help--;
+		
+		}
+
+
+		if(play==0 && help==0 && mx>575 &&mx<736&&my>452&&my<510)
+		{
+			help++;
+		}
+	    if(play==0&&mx>550&&mx<743&&my>528&&my<602)
+		{
+			play=1;
+		}
+
+		else if(play==1&&turn <9 && mx > 250 && mx < 350 && my > 270 && my < 370)
+		{
+			if(occupied[0]==0&& win==0)
+			{
+				if(turn%2==0)
+				{
+					occupied[0]=1;
+					array[0]=1;
+					x[turn] = 252;
+					y[turn] = 273;
+					turn++;
+				}
+				else
+				{
+					occupied[0]=1;
+					array[0]=2;
+					x[turn] = 252;
+					y[turn] = 273;
+					turn++;
+				}
+			}
+				
+
+		}
+		else if(play==1&&turn <9 && mx > 350 && mx < 450 && my > 270 && my < 370)
+		{
+			if(occupied[1]==0&&win==0)
+			{
+				if(turn%2==0)
+				{
+					occupied[1]=1;
+					array[1]=1;
+					x[turn] = 352;
+					y[turn] = 273;
+					turn++;
+				}
+				else
+				{
+					occupied[1]=1;
+					array[1]=2;
+					x[turn] = 352;
+					y[turn] = 273;
+					turn++;
+				}
+			}
+				
+
+		}
+		else if(play==1&&turn <9 && mx > 450 && mx < 550 && my > 270 && my < 370)
+		{
+			if(occupied[2]==0&&win==0)
+			{
+				if(turn%2==0)
+				{
+					occupied[2]=1;
+					array[2]=1;
+					x[turn] = 452;
+					y[turn] = 273;
+					turn++;
+				}
+				else
+				{
+					occupied[2]=1;
+					array[2]=2;
+					x[turn] = 452;
+					y[turn] = 273;
+					turn++;
+				}
+			}
+				
+
+		}
+		else if(play==1&&turn <9 && mx > 250 && mx < 350 && my > 370 && my < 470)
+		{
+			if(occupied[3]==0&&win==0)
+			{
+				if(turn%2==0)
+				{
+					occupied[3]=1;
+					array[3]=1;
+					x[turn] = 252;
+					y[turn] = 373;
+					turn++;
+				}
+				else
+				{
+					occupied[3]=1;
+					array[3]=2;
+					x[turn] = 252;
+					y[turn] = 373;
+					turn++;
+				}
+			}
+				
+
+		}
+		else if(play==1&&turn <9 && mx > 350 && mx < 450 && my > 370 && my < 470)
+		{
+			if(occupied[4]==0&&win==0)
+			{
+				if(turn%2==0)
+				{
+					occupied[4]=1;
+					array[4]=1;
+					x[turn] = 352;
+					y[turn] = 373;
+					turn++;
+				}
+				else
+				{
+					occupied[4]=1;
+					array[4]=2;
+					x[turn] = 352;
+					y[turn] = 373;
+					turn++;
+				}
+			}
+				
+
+		}
+		else if(play==1&&turn <9 && mx > 450 && mx < 550 && my > 370 && my < 470)
+		{
+			if(occupied[5]==0&&win==0)
+			{
+				if(turn%2==0)
+				{
+					occupied[5]=1;
+					array[5]=1;
+					x[turn] = 452;
+					y[turn] = 373;
+					turn++;
+				}
+				else
+				{
+					occupied[5]=1;
+					array[5]=2;
+					x[turn] = 452;
+					y[turn] = 373;
+					turn++;
+				}
+			}
+				
+
+		}
+		else if(play==1&&turn <9 && mx > 250 && mx < 350 && my > 470 && my < 570)
+		{
+			if(occupied[6]==0&&win==0)
+			{
+				if(turn%2==0)
+				{
+					occupied[6]=1;
+					array[6]=1;
+					x[turn] = 252;
+					y[turn] = 473;
+					turn++;
+				}
+				else
+				{
+					occupied[6]=1;
+					array[6]=2;
+					x[turn] = 252;
+					y[turn] = 473;
+					turn++;
+				}
+			}
+				
+
+		}
+		else if(play==1&&turn <9 && mx > 350 && mx < 450 && my > 470 && my < 570)
+		{
+			if(occupied[7]==0&&win==0)
+			{
+				if(turn%2==0)
+				{
+					occupied[7]=1;
+					array[7]=1;
+					x[turn] = 352;
+					y[turn] = 473;
+					turn++;
+				}
+				else
+				{
+					occupied[7]=1;
+					array[7]=2;
+					x[turn] = 352;
+					y[turn] = 473;
+					turn++;
+				}
+			}
+				
+
+		}
+		else if(play==1&&turn <9 && mx > 450 && mx < 550 && my > 470 && my < 570)
+		{
+			if(occupied[8]==0&&win==0)
+			{
+				if(turn%2==0)
+				{
+					occupied[8]=1;
+					array[8]=1;
+					x[turn] = 452;
+					y[turn] = 473;
+					turn++;
+				}
+				else
+				{
+					occupied[8]=1;
+					array[8]=2;
+					x[turn] = 452;
+					y[turn] = 473;
+					turn++;
+				}
+			}
+				
+
+		}
+		//place your codes here	
+	}
+	if(button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+	{
+		//place your codes here	
+	}
+}
+
+/*
+	function iKeyboard() is called whenever the user hits a key in keyboard.
+	key- holds the ASCII value of the key pressed. 
+*/
+void iKeyboard(unsigned char key)
+{
+	if(key == 'q')
+	{
+		//do something with 'q'
+	}
+	//place your codes for other keys here
+}
+
+/*
+	function iSpecialKeyboard() is called whenver user hits special keys like-
+	function keys, home, end, pg up, pg down, arraows etc. you have to use 
+	appropriate constants to detect them. A list is:
+	GLUT_KEY_F1, GLUT_KEY_F2, GLUT_KEY_F3, GLUT_KEY_F4, GLUT_KEY_F5, GLUT_KEY_F6, 
+	GLUT_KEY_F7, GLUT_KEY_F8, GLUT_KEY_F9, GLUT_KEY_F10, GLUT_KEY_F11, GLUT_KEY_F12, 
+	GLUT_KEY_LEFT, GLUT_KEY_UP, GLUT_KEY_RIGHT, GLUT_KEY_DOWN, GLUT_KEY_PAGE UP, 
+	GLUT_KEY_PAGE DOWN, GLUT_KEY_HOME, GLUT_KEY_END, GLUT_KEY_INSERT 
+*/
+void iSpecialKeyboard(unsigned char key)
+{
+
+	if(key == GLUT_KEY_END)
+	{
+		exit(0);	
+	}
+	//place your codes for other keys here
+}
+
+int main()
+{
+	//place your own initialization codes here. 
+	iInitialize(800, 700, "Tic tac toe");
+	return 0;
+}	
